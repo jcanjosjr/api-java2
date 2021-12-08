@@ -1,5 +1,8 @@
 package view;
 
-public class CadastrarLeao {
+import javax.swing.JFrame;
+
+public class CadastrarLeao extends JFrame {
     
+
 }
