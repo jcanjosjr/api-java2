@@ -8,7 +8,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-public class Golfinho extends Animal {
+public class Golfinho extends Animal implements Pesquisa {
     
     // Atributos da classe Golfinho.
     private int qtdTreinos;
@@ -81,6 +81,7 @@ public class Golfinho extends Animal {
             
     }
 
+    // Realizando um INSERT na tabela Golfinho.
     public void insertGolfinho() {
         try {
             // Instânciando a classe DAO, start na conexão com DB.
@@ -112,4 +113,120 @@ public class Golfinho extends Animal {
             System.err.println(e.getMessage());
         }
     }
+
+    // Buscando todos os dados na tabela Golfinho
+    public void getAll() {
+        try {
+            // Instânciando a classe DAO, start na conexão com DB.
+            DAO dao = new DAO();
+            Connection conn = dao.startConnection();
+
+            // Criando o java statement.
+            Statement st = conn.createStatement();
+    
+            // Criando o SELECT para trazer todos os dados da tabela Golfinho.
+            String select = "SELECT * FROM zoo.golfinho;";
+
+            // Executando a query, e obtendo o resultado.
+            ResultSet rs = st.executeQuery(select);
+
+            // Iterando sobre o resultado.
+            while (rs.next()) {
+                Golfinho golfinho = new Golfinho(
+                    rs.getInt(1),
+                    rs.getString(2),
+                    rs.getInt(3)
+                );
+
+                System.out.println(golfinho);
+            }
+               
+
+            // Fechando a conexão com DB.
+            dao.endConnection();
+
+        } catch (Exception e) {
+            System.err.println("Tivemos um problema.");
+            System.err.println(e.getMessage());
+        }
+    }
+
+    // Buscando Golfinho pelo ID.
+    public void getPorId(int id) {
+        try {
+            // Instânciando a classe DAO, start na conexão com DB.
+            DAO dao = new DAO();
+            Connection conn = dao.startConnection();
+   
+            // Preparando o Select com PreparedStatement:
+            PreparedStatement select = conn.prepareStatement(
+                "SELECT * FROM zoo.golfinho WHERE id = ?;",
+                PreparedStatement.RETURN_GENERATED_KEYS
+            );
+
+            // Passando o ID recebido no parâmetro para a Query.
+            select.setInt(1, id);
+            // Executando a Query.
+            ResultSet rs = select.executeQuery();
+
+
+            // Iterando sobre o resultado.
+            while (rs.next()) {
+                Golfinho golfinho = new Golfinho(
+                    rs.getInt(1),
+                    rs.getString(2),
+                    rs.getInt(3)
+                );
+
+                System.out.println(golfinho);
+            }
+               
+
+            // Fechando a conexão com DB.
+            dao.endConnection();
+
+        } catch (Exception e) {
+            System.err.println("Tivemos um problema.");
+            System.err.println(e.getMessage());
+        }
+    }
+
+    // Realizando um Update em Golfinho conforme o ID.
+    public void updateLeao() {
+        try {
+            // Instânciando a classe DAO, start na conexão com DB.
+            DAO dao = new DAO();
+            Connection conn = dao.startConnection();
+   
+            // Preparando o Select com PreparedStatement:
+            PreparedStatement select = conn.prepareStatement(
+                "UPDATE zoo.leao SET id = ?, nome = ?, alimentacao = ?, visitantes = ? WHERE id = ?;",
+                PreparedStatement.RETURN_GENERATED_KEYS
+            );
+
+            // Executando a Query.
+            ResultSet rs = select.executeQuery();
+
+
+            // Iterando sobre o resultado.
+            while (rs.next()) {
+                Golfinho golfinho = new Golfinho(
+                    rs.getInt(1),
+                    rs.getString(2),
+                    rs.getInt(3)
+                );
+
+                System.out.println(golfinho);
+            }
+               
+
+            // Fechando a conexão com DB.
+            dao.endConnection();
+
+        } catch (Exception e) {
+            System.err.println("Tivemos um problema.");
+            System.err.println(e.getMessage());
+        }
+    }
+
 }

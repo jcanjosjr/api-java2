@@ -57,3 +57,8 @@ ALTER TABLE `treinamento` ADD CONSTRAINT `treinamento_fk0` FOREIGN KEY (`golfinh
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+INSERT INTO jaula VALUES (1, 'Jaula para Leão');
+INSERT INTO jaula VALUES (2, 'Jaula para Golfinhos');
+INSERT INTO golfinho VALUES (1, 'Vigarista', 2, 2);
+INSERT INTO leao VALUES (1, 'Dudu Duelista', 2, 1, 1);
