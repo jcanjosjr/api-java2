@@ -219,8 +219,6 @@ public class Leao extends Animal implements Pesquisa {
                 PreparedStatement.RETURN_GENERATED_KEYS
             );
 
-            // Passando o ID recebido no parâmetro para a Query.
-            select.setInt(1, id);
             // Executando a Query.
             ResultSet rs = select.executeQuery();
 
