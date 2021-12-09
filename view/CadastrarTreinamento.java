@@ -1,17 +1,25 @@
 package view;
 
+
 // Importando bibliotecas.
 import java.awt.*;
+import java.sql.Date;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+// Import de models
+import model.Treinamento;
+
+
 
 public class CadastrarTreinamento extends JFrame {
 
         // Instânciando campos de texto.
     JLabel labelId = new JLabel("ID: ");
-    JLabel labelName = new JLabel("Data: ");
+    JLabel labelData = new JLabel("Data [yyyy-MM-DD]: ");
     JLabel labelDetalhes = new JLabel("Detalhes: ");
+    JLabel labelGolfinho = new JLabel("ID do Golfinho: ");
 
     // Instânciando botões.
     JButton button1 = new JButton("Cadastrar");
@@ -19,8 +27,10 @@ public class CadastrarTreinamento extends JFrame {
 
     // Instânciando campos de input.
     JTextField textId = new JTextField(25);
-    JTextField textName = new JTextField(25);
+    JTextField textData = new JTextField(25);
     JTextField textDetalhes = new JTextField(25);
+    JTextField textGolfinho = new JTextField(25);
+
 
     public CadastrarTreinamento() {
 
@@ -30,19 +40,23 @@ public class CadastrarTreinamento extends JFrame {
         this.setVisible(true);
 
         Container pane = this.getContentPane();
-        pane.setLayout(new GridLayout(4,2));
+        pane.setLayout(new GridLayout(5,2));
 
         // Adicionando o campo ID.
         pane.add(labelId);
         pane.add(textId);
 
         // Adicionando o campo Name.
-        pane.add(labelName);
-        pane.add(textName);
+        pane.add(labelData);
+        pane.add(textData);
 
         // Adicionando o campo Detalhes.
         pane.add(labelDetalhes);
         pane.add(textDetalhes);
+
+        // Adicionando o campo ID Golfinho.
+        pane.add(labelGolfinho);
+        pane.add(textGolfinho);
 
         // Adicionando botões
         pane.add(button1);
@@ -64,11 +78,53 @@ public class CadastrarTreinamento extends JFrame {
     }
 
     private void button1ActionPerformed(ActionEvent e) {
-        // Implementar
+        try {
+            // Recebendo ID de Treinamento.
+            int numId = Integer.parseInt(textId.getText());
+    
+            // Convertendo a String da Data para o tipo Date.
+            String dataTexto = textData.getText();
+            Date data = Date.valueOf(dataTexto);
+    
+            // Recebendo detalhes em forma de String.
+            String detalhes = textDetalhes.getText();
+    
+            // Recebendo o ID de Golfinho.
+            int numGolfinho = Integer.parseInt(textGolfinho.getText());
+    
+            // Instânciando Treinamento.
+            Treinamento treinamento = new Treinamento(numId, data, detalhes);
+    
+            // Inserindo dados no DB com o método de Insert.
+            treinamento.inserirTreinamento(numId, numGolfinho, data, detalhes);
+    
+            JOptionPane.showMessageDialog(
+                this,
+                "Treinamento cadastrado. \n" + treinamento,
+                "Confirmação de Cadastro",
+                JOptionPane.INFORMATION_MESSAGE    
+            );
+
+        } catch (Exception err) {
+            System.err.println("Tivemos um problema no cadastro.");
+            System.err.println(err.getMessage());
+        }
+
     }
 
     private void button2ActionPerformed(ActionEvent e) {
-        // implementar.
+        JOptionPane.showMessageDialog(
+            this,
+            "Tarefa cancelada.",
+            "Confirmação de Cadastro",
+            JOptionPane.INFORMATION_MESSAGE
+        );
+    }
+
+    public static void main(String[] args) {
+        
+        CadastrarTreinamento tela = new CadastrarTreinamento();
+
     }
 
 }

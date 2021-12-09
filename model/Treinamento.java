@@ -1,12 +1,13 @@
 package model;
 
-import java.sql.Connection;
+// Importando bibliotecas.
 import java.sql.Date;
-import java.sql.PreparedStatement;
+import java.util.List;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.sql.Connection;
 import java.util.ArrayList;
-import java.util.List;
+import java.sql.PreparedStatement;
 
 public class Treinamento {
     
@@ -94,7 +95,7 @@ public class Treinamento {
         return printTreinamento;
     }
 
-    public void inserirTreinamento() {
+    public void inserirTreinamento(int id, int golfinhoId, Date data, String detalhes) {
         try {
             // Instânciando a classe DAO, start na conexão com DB.
             DAO dao = new DAO();
@@ -105,10 +106,17 @@ public class Treinamento {
     
             // Criando o INSERT para inserir dados em Treinamento.
             PreparedStatement insert = conn.prepareStatement(
-                "INSERT INTO zoo.treinamento VALUES (id, golfinho_id, data, detalhes) VALUES (?, ?, ?, ?);",
+                "INSERT INTO zoo.treinamento VALUES (?, ?, ?, ?);",
                 PreparedStatement.RETURN_GENERATED_KEYS
             );
 
+            // Atribuindo parâmetros ao INSERT.
+            insert.setInt(1, id);
+            insert.setInt(2, golfinhoId);
+            insert.setDate(3, data);
+            insert.setString(4, detalhes);
+            
+            // Executando o Insert para criação da Classe.
             if(insert.executeUpdate() > 0) {
                 ResultSet resultado = st.getGeneratedKeys();
 
@@ -124,12 +132,13 @@ public class Treinamento {
             }
 
             // Fechando a conexão com DB.
-            dao.endConnection();
-
+            //dao.endConnection();
+            
         } catch (Exception e) {
-            System.err.println("Tivemos um problema.");
+            System.err.println("Tivemos um problema envolvendo o banco.");
             System.err.println(e.getMessage());
         }
+        
     }
     
 }

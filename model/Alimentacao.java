@@ -104,7 +104,7 @@ public class Alimentacao {
     
             // Criando o INSERT para inserir todos os dados da tabela Leão.
             PreparedStatement insert = conn.prepareStatement(
-                "INSERT INTO zoo.alimentacao VALUES (id, leao_id, data, detalhes) VALUES (?, ?, ?, ?);",
+                "INSERT INTO zoo.alimentacao VALUES (?, ?, ?, ?);",
                 PreparedStatement.RETURN_GENERATED_KEYS
             );
 

@@ -106,7 +106,7 @@ public class Leao extends Animal implements Pesquisa {
     
             // Criando o INSERT para inserir todos os dados da tabela Leão.
             PreparedStatement insert = conn.prepareStatement(
-                "INSERT INTO zoo.leao VALUES (id, nome, alimentacao, visitantes, jaula_id) VALUES (?,  ?, ?, ?, ?);",
+                "INSERT INTO zoo.leao VALUES (?,  ?, ?, ?, ?);",
                 PreparedStatement.RETURN_GENERATED_KEYS
             );
 

@@ -93,7 +93,7 @@ public class Golfinho extends Animal implements Pesquisa {
     
             // Criando o INSERT para inserir todos os dados da tabela Leão.
             PreparedStatement insert = conn.prepareStatement(
-                "INSERT INTO zoo.golfinho VALUES (id, nome, treinamento, jaula_id) VALUES (?, ?, ?, ?);",
+                "INSERT INTO zoo.golfinho VALUES (?, ?, ?, ?);",
                 PreparedStatement.RETURN_GENERATED_KEYS
             );
 
