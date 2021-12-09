@@ -95,7 +95,7 @@ public class Treinamento {
         return printTreinamento;
     }
 
-    public void inserirTreinamento(int id, int golfinhoId, Date data, String detalhes) {
+    public static Treinamento inserirTreinamento(int golfinhoId, Date data, String detalhes) throws Exception {
         try {
             // Instânciando a classe DAO, start na conexão com DB.
             DAO dao = new DAO();
@@ -106,37 +106,28 @@ public class Treinamento {
     
             // Criando o INSERT para inserir dados em Treinamento.
             PreparedStatement insert = conn.prepareStatement(
-                "INSERT INTO zoo.treinamento VALUES (?, ?, ?, ?);",
+                "INSERT INTO zoo.treinamento (golfinho_id, data, detalhes) VALUES (?, ?, ?);",
                 PreparedStatement.RETURN_GENERATED_KEYS
             );
 
             // Atribuindo parâmetros ao INSERT.
-            insert.setInt(1, id);
-            insert.setInt(2, golfinhoId);
-            insert.setDate(3, data);
-            insert.setString(4, detalhes);
-            
-            // Executando o Insert para criação da Classe.
-            if(insert.executeUpdate() > 0) {
-                ResultSet resultado = st.getGeneratedKeys();
+            insert.setInt(1, golfinhoId);
+            insert.setDate(2, data);
+            insert.setString(3, detalhes);
 
-                if(resultado.next()) {
-                    Treinamento treinamento = new Treinamento(
-                        resultado.getInt(1),
-                        resultado.getDate(2),
-                        resultado.getString(3)
-                    );
-
-                    System.out.println(treinamento);
-                }
+            if (insert.executeUpdate() > 0) {                
+                ResultSet rs = insert.getGeneratedKeys();
+                rs.next();
+                Treinamento treinamento = new Treinamento(rs.getInt(1), data, detalhes);
+                // Fechando a conexão com DB.
+                dao.endConnection();
+                return treinamento;
             }
-
             // Fechando a conexão com DB.
-            //dao.endConnection();
-            
+            dao.endConnection();
+            throw new Exception("Erro ao incluir Treinamento");
         } catch (Exception e) {
-            System.err.println("Tivemos um problema envolvendo o banco.");
-            System.err.println(e.getMessage());
+            throw new Exception(e.getMessage());
         }
         
     }

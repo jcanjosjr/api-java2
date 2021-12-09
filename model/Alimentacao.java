@@ -93,7 +93,7 @@ public class Alimentacao {
     }
 
     // Inserindo dados em Alimentação.
-    public void insertAlimentacao() {
+    public void insertAlimentacao(int id, int idLeao, Date data, String detalhes) {
         try {
             // Instânciando a classe DAO, iniciando conexão com DB.
             DAO dao = new DAO();
@@ -107,23 +107,15 @@ public class Alimentacao {
                 "INSERT INTO zoo.alimentacao VALUES (?, ?, ?, ?);",
                 PreparedStatement.RETURN_GENERATED_KEYS
             );
-
-            if(insert.executeUpdate() > 0) {
-                ResultSet resultado = st.getGeneratedKeys();
-
-                if(resultado.next()) {
-                    Alimentacao alimentacao = new Alimentacao(
-                        resultado.getInt(1),
-                        resultado.getDate(2),
-                        resultado.getString(3)
-                    );
-
-                    System.out.println(alimentacao);
-                }
-            }
+                
+            // Atribuindo parâmetros ao INSERT.
+            insert.setInt(1, id);
+            insert.setInt(2, idLeao);
+            insert.setDate(3, data);
+            insert.setString(4, detalhes);
 
             // Fechando a conexão com DB.
-            dao.endConnection();
+            // dao.endConnection();
 
         } catch (Exception e) {
             System.err.println("Tivemos um problema.");

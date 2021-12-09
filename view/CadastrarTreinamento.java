@@ -16,7 +16,7 @@ import model.Treinamento;
 public class CadastrarTreinamento extends JFrame {
 
         // Instânciando campos de texto.
-    JLabel labelId = new JLabel("ID: ");
+    JLabel labelId = new JLabel("ID Treinamento: ");
     JLabel labelData = new JLabel("Data [yyyy-MM-DD]: ");
     JLabel labelDetalhes = new JLabel("Detalhes: ");
     JLabel labelGolfinho = new JLabel("ID do Golfinho: ");
@@ -62,7 +62,7 @@ public class CadastrarTreinamento extends JFrame {
         pane.add(button1);
         pane.add(button2);
     
-        // Mensagens dos botões:
+        // Adicionando evento dos botões:
         button1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 button1ActionPerformed(e);
@@ -78,10 +78,7 @@ public class CadastrarTreinamento extends JFrame {
     }
 
     private void button1ActionPerformed(ActionEvent e) {
-        try {
-            // Recebendo ID de Treinamento.
-            int numId = Integer.parseInt(textId.getText());
-    
+        try {    
             // Convertendo a String da Data para o tipo Date.
             String dataTexto = textData.getText();
             Date data = Date.valueOf(dataTexto);
@@ -91,12 +88,9 @@ public class CadastrarTreinamento extends JFrame {
     
             // Recebendo o ID de Golfinho.
             int numGolfinho = Integer.parseInt(textGolfinho.getText());
-    
-            // Instânciando Treinamento.
-            Treinamento treinamento = new Treinamento(numId, data, detalhes);
-    
+        
             // Inserindo dados no DB com o método de Insert.
-            treinamento.inserirTreinamento(numId, numGolfinho, data, detalhes);
+            Treinamento treinamento = Treinamento.inserirTreinamento(numGolfinho, data, detalhes);
     
             JOptionPane.showMessageDialog(
                 this,
