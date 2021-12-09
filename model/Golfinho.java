@@ -2,11 +2,11 @@ package model;
 
 // Importando bibliotecas:
 import java.util.List;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.Statement;
+import java.sql.ResultSet;
+import java.sql.Connection;
 import java.util.ArrayList;
+import java.sql.PreparedStatement;
 
 public class Golfinho extends Animal implements Pesquisa {
     
