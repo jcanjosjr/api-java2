@@ -11,12 +11,9 @@ import java.awt.event.ActionListener;
 // Import de models
 import model.Treinamento;
 
-
-
 public class CadastrarTreinamento extends JFrame {
 
-        // Instânciando campos de texto.
-    JLabel labelId = new JLabel("ID Treinamento: ");
+    // Instânciando campos de texto.
     JLabel labelData = new JLabel("Data [yyyy-MM-DD]: ");
     JLabel labelDetalhes = new JLabel("Detalhes: ");
     JLabel labelGolfinho = new JLabel("ID do Golfinho: ");
@@ -26,7 +23,6 @@ public class CadastrarTreinamento extends JFrame {
     JButton button2 = new JButton("Cancelar");
 
     // Instânciando campos de input.
-    JTextField textId = new JTextField(25);
     JTextField textData = new JTextField(25);
     JTextField textDetalhes = new JTextField(25);
     JTextField textGolfinho = new JTextField(25);
@@ -40,13 +36,9 @@ public class CadastrarTreinamento extends JFrame {
         this.setVisible(true);
 
         Container pane = this.getContentPane();
-        pane.setLayout(new GridLayout(5,2));
+        pane.setLayout(new GridLayout(4,2));
 
-        // Adicionando o campo ID.
-        pane.add(labelId);
-        pane.add(textId);
-
-        // Adicionando o campo Name.
+        // Adicionando o campo Data.
         pane.add(labelData);
         pane.add(textData);
 
@@ -77,21 +69,23 @@ public class CadastrarTreinamento extends JFrame {
 
     }
 
+    // Gerando ação ao botão de Confirmar.
     private void button1ActionPerformed(ActionEvent e) {
         try {    
             // Convertendo a String da Data para o tipo Date.
             String dataTexto = textData.getText();
             Date data = Date.valueOf(dataTexto);
     
-            // Recebendo detalhes em forma de String.
+            // Convertando detalhes em forma de String.
             String detalhes = textDetalhes.getText();
     
-            // Recebendo o ID de Golfinho.
+            // Convertando o ID de Golfinho para Int.
             int numGolfinho = Integer.parseInt(textGolfinho.getText());
         
-            // Inserindo dados no DB com o método de Insert.
+            // Instânciando Treinamento.
             Treinamento treinamento = Treinamento.inserirTreinamento(numGolfinho, data, detalhes);
     
+            // Gerando caixa de mensagem após ação efetuada.
             JOptionPane.showMessageDialog(
                 this,
                 "Treinamento cadastrado. \n" + treinamento,
@@ -106,6 +100,7 @@ public class CadastrarTreinamento extends JFrame {
 
     }
 
+    // Gerando ação ao botão de Cancelar.
     private void button2ActionPerformed(ActionEvent e) {
         JOptionPane.showMessageDialog(
             this,
@@ -113,12 +108,6 @@ public class CadastrarTreinamento extends JFrame {
             "Confirmação de Cadastro",
             JOptionPane.INFORMATION_MESSAGE
         );
-    }
-
-    public static void main(String[] args) {
-        
-        CadastrarTreinamento tela = new CadastrarTreinamento();
-
     }
 
 }

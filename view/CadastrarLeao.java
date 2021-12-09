@@ -6,23 +6,27 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+// Importando models.
+import model.Leao;
+
+
 public class CadastrarLeao extends JFrame {
     
     // Instânciando campos de texto.
-    JLabel labelId = new JLabel("ID: ");
-    JLabel labelName = new JLabel("Nome: ");
-    JLabel labelAlimentacao = new JLabel("Alimentação: ");
-    JLabel labelVisitantes = new JLabel("Visitantes: ");
+    JLabel labelNome = new JLabel("Nome: ");
+    JLabel labelAlimentacao = new JLabel("Nome: ");
+    JLabel labelVisitantes = new JLabel("Alimentação: ");
+    JLabel labelJaula = new JLabel("ID referente à Jaula: ");
 
     // Instânciando botões.
     JButton button1 = new JButton("Cadastrar");
     JButton button2 = new JButton("Cancelar");
 
     // Instânciando campos de input.
-    JTextField textId = new JTextField(25);
-    JTextField textName = new JTextField(25);
+    JTextField textNome = new JTextField(25);
     JTextField textAlimentacao = new JTextField(25);
     JTextField textVisitantes = new JTextField(25);
+    JTextField textJaula = new JTextField(25);
 
     public CadastrarLeao() {
 
@@ -34,21 +38,21 @@ public class CadastrarLeao extends JFrame {
         Container pane = this.getContentPane();
         pane.setLayout(new GridLayout(5,2));
 
-        // Adicionando o campo ID.
-        pane.add(labelId);
-        pane.add(textId);
+        // Adicionando o campo Nome.
+        pane.add(labelNome);
+        pane.add(textNome);
 
-        // Adicionando o campo Name.
-        pane.add(labelName);
-        pane.add(textName);
-
-        // Adicionando o campo Username.
+        // Adicionando o campo Alimentação.
         pane.add(labelAlimentacao);
-        pane.add(labelAlimentacao);
+        pane.add(textAlimentacao);
 
-        // Adicionando o campo Password.
+        // Adicionando o campo Visitantes.
         pane.add(labelVisitantes);
         pane.add(textVisitantes);
+
+        // Adicionando o campo Jaula.
+        pane.add(labelJaula);
+        pane.add(textJaula);
 
         // Adicionando botões
         pane.add(button1);
@@ -69,11 +73,45 @@ public class CadastrarLeao extends JFrame {
 
     }
 
+    // Gerando ação ao botão de Confirmar.
     private void button1ActionPerformed(ActionEvent e) {
-        // Implementar
-    }
+        try {
+            // Convertendo Nome Leão em forma de String
+            String nomeLeao = textNome.getText();
 
+            // Convertendo Alimentações para Int.
+            int numAlimentado = Integer.parseInt(textAlimentacao.getText());
+
+            // Convertendo Visitantes para Int.
+            int numVisitantes = Integer.parseInt(textVisitantes.getText());
+
+            // Convertendo IDJaula para Int.
+            int numJaula = Integer.parseInt(textJaula.getText());
+
+            // Instânciando Leão com INSERT no DB.
+            Leao leao = Leao.insertLeao(nomeLeao, numAlimentado, numVisitantes, numJaula);
+
+            // Gerando caixa de mensagem após ação efetuada.
+            JOptionPane.showMessageDialog(
+                this,
+                "Treinamento cadastrado. \n" + leao,
+                "Confirmação de Cadastro",
+                JOptionPane.INFORMATION_MESSAGE    
+            );
+
+        } catch (Exception err) {
+            System.err.println("Tivemos um problema no cadastro.");
+            System.err.println(err.getMessage());
+        }
+    } 
+
+    // Gerando ação ao botão de Cancelar.
     private void button2ActionPerformed(ActionEvent e) {
-        // implementar.
+        JOptionPane.showMessageDialog(
+            this,
+            "Tarefa cancelada.",
+            "Confirmação de Cadastro",
+            JOptionPane.INFORMATION_MESSAGE
+        );
     }
 }

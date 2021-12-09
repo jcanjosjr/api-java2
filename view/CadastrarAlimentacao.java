@@ -13,8 +13,7 @@ import model.Alimentacao;
 public class CadastrarAlimentacao extends JFrame {
 
     // Instânciando campos de texto.
-    JLabel labelId = new JLabel("ID Alimentação: ");
-    JLabel labelData = new JLabel("Data: ");
+    JLabel labelData = new JLabel("Data [yyyy-MM-DD]: ");
     JLabel labelDetalhes = new JLabel("Detalhes: ");
     JLabel labelLeao = new JLabel("ID do Leão: ");
 
@@ -23,7 +22,6 @@ public class CadastrarAlimentacao extends JFrame {
     JButton button2 = new JButton("Cancelar");
 
     // Instânciando campos de input.
-    JTextField textId = new JTextField(25);
     JTextField textData = new JTextField(25);
     JTextField textDetalhes = new JTextField(25);
     JTextField textLeao = new JTextField(25);
@@ -38,11 +36,7 @@ public class CadastrarAlimentacao extends JFrame {
         Container pane = this.getContentPane();
         pane.setLayout(new GridLayout(4,2));
 
-        // Adicionando o campo ID.
-        pane.add(labelId);
-        pane.add(textId);
-
-        // Adicionando o campo Name.
+        // Adicionando o campo Data.
         pane.add(labelData);
         pane.add(textData);
 
@@ -50,13 +44,13 @@ public class CadastrarAlimentacao extends JFrame {
         pane.add(labelDetalhes);
         pane.add(textDetalhes);
 
+        // Adicionando o campo ID Leão.
+        pane.add(labelLeao);
+        pane.add(textLeao);
+
         // Adicionando botões
         pane.add(button1);
         pane.add(button2);
-
-        // Adicionando o campo ID Golfinho.
-        pane.add(labelLeao);
-        pane.add(textLeao);
 
         // Adicionando evento dos botões:
         button1.addActionListener(new ActionListener() {
@@ -72,11 +66,9 @@ public class CadastrarAlimentacao extends JFrame {
         });
     }
 
+    // Gerando ação ao botão de Confirmar.
     private void button1ActionPerformed(ActionEvent e) {
         try {
-            // Recebendo ID de Treinamento.
-            int numId = Integer.parseInt(textId.getText());
-    
             // Convertendo a String da Data para o tipo Date.
             String dataTexto = textData.getText();
             Date data = Date.valueOf(dataTexto);
@@ -84,18 +76,16 @@ public class CadastrarAlimentacao extends JFrame {
             // Recebendo detalhes em forma de String.
             String detalhes = textDetalhes.getText();
     
-            // Recebendo o ID de Golfinho.
+            // Recebendo o ID de Leão.
             int numLeao = Integer.parseInt(textLeao.getText());
     
-            // Instânciando Treinamento.
-            Alimentacao alimentacao = new Alimentacao(numLeao, data, detalhes);
+            // Instânciando Alimentação.
+            Alimentacao alimentacao = Alimentacao.insertAlimentacao(numLeao, data, detalhes);
 
-            // Inserindo dados no DB com o método de Insert.
-            alimentacao.insertAlimentacao(numId, numLeao, data, detalhes);
-    
+            // Gerando caixa de mensagem após ação efetuada.
             JOptionPane.showMessageDialog(
                 this,
-                "Alimentação cadastrado. \n" + alimentacao,
+                "Alimentação cadastrada. \n" + alimentacao,
                 "Confirmação de Cadastro",
                 JOptionPane.INFORMATION_MESSAGE    
             );
@@ -107,6 +97,7 @@ public class CadastrarAlimentacao extends JFrame {
 
     }
 
+    // Gerando ação ao botão de Cancelar.
     private void button2ActionPerformed(ActionEvent e) {
         JOptionPane.showMessageDialog(
             this,
@@ -116,9 +107,4 @@ public class CadastrarAlimentacao extends JFrame {
         );
     }
 
-    public static void main(String[] args) {
-        
-        CadastrarTreinamento tela = new CadastrarTreinamento();
-
-    }
 }

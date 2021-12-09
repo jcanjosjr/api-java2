@@ -4,7 +4,6 @@ package model;
 import java.sql.Date;
 import java.util.List;
 import java.sql.ResultSet;
-import java.sql.Statement;
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.sql.PreparedStatement;
@@ -100,9 +99,6 @@ public class Treinamento {
             // Instânciando a classe DAO, start na conexão com DB.
             DAO dao = new DAO();
             Connection conn = dao.startConnection();
-
-            // Criando o java statement.
-            Statement st = conn.createStatement();
     
             // Criando o INSERT para inserir dados em Treinamento.
             PreparedStatement insert = conn.prepareStatement(
@@ -115,17 +111,21 @@ public class Treinamento {
             insert.setDate(2, data);
             insert.setString(3, detalhes);
 
+            // Executando a QUERY utilizando ResultSet para pegar resultados.
             if (insert.executeUpdate() > 0) {                
                 ResultSet rs = insert.getGeneratedKeys();
                 rs.next();
                 Treinamento treinamento = new Treinamento(rs.getInt(1), data, detalhes);
+
                 // Fechando a conexão com DB.
                 dao.endConnection();
+
                 return treinamento;
             }
+
             // Fechando a conexão com DB.
             dao.endConnection();
-            throw new Exception("Erro ao incluir Treinamento");
+            throw new Exception("Erro ao incluir Treinamento.");
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }

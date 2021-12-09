@@ -82,35 +82,42 @@ public class Golfinho extends Animal implements Pesquisa {
     }
 
     // Realizando um INSERT na tabela Golfinho.
-    public void insertGolfinho() {
+    public static Golfinho insertGolfinho(String nome, int treinamento, int jaulaId) throws Exception {
         try {
             // Instânciando a classe DAO, start na conexão com DB.
             DAO dao = new DAO();
             Connection conn = dao.startConnection();
-
-            // Criando o java statement.
-            Statement st = conn.createStatement();
     
             // Criando o INSERT para inserir todos os dados da tabela Leão.
             PreparedStatement insert = conn.prepareStatement(
-                "INSERT INTO zoo.golfinho VALUES (?, ?, ?, ?);",
+                "INSERT INTO zoo.golfinho (nome, treinamento, jaula_id) VALUES (?, ?, ?);",
                 PreparedStatement.RETURN_GENERATED_KEYS
             );
 
-            if(insert.executeUpdate() > 0) {
-                ResultSet resultado = st.getGeneratedKeys();
+            // Atribuindo parâmetros ao INSERT.
+            insert.setString(1, nome);
+            insert.setInt(2, treinamento);
+            insert.setInt(3, jaulaId);
 
-                if(resultado.next()) {
-                    resultado.getInt(1);
-                }
+            // Executando a QUERY utilizando ResultSet para pegar resultados.
+            if (insert.executeUpdate() > 0) {
+                ResultSet rs = insert.getGeneratedKeys();
+                rs.next();
+                Golfinho golfinho = new Golfinho(rs.getInt(1), nome, treinamento);
+
+                // Fechando a conexão com DB.
+                dao.endConnection();
+                
+                return golfinho;
+                
             }
 
             // Fechando a conexão com DB.
             dao.endConnection();
+            throw new Exception("Erro ao incluir Golfinho.");
 
         } catch (Exception e) {
-            System.err.println("Tivemos um problema.");
-            System.err.println(e.getMessage());
+            throw new Exception(e.getMessage());
         }
     }
 

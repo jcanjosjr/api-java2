@@ -2,16 +2,16 @@ package model;
 
 // Importando bibliotecas.
 import java.util.List;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 
 public class Leao extends Animal implements Pesquisa {
     
     // Atributos da classe Leão.
-    private int hrAlimentado;
+    private int alimentado;
     private int visitantes;
     // Leão possui N ->  Alimentações.
     private List<Alimentacao> alimentacoes = new ArrayList<>();
@@ -20,18 +20,18 @@ public class Leao extends Animal implements Pesquisa {
     public Leao(
         int id,
         String nome,
-        int hrAlimentado,
+        int alimentado,
         int visitantes
     ) {
         super(id, nome);
-        this.hrAlimentado = hrAlimentado;
+        this.alimentado = alimentado;
         this.visitantes = visitantes;
     }
 
 
    // Getters
-   public int getHrAlimentado() {
-    return hrAlimentado;
+   public int getAlimentado() {
+    return alimentado;
     }
 
     public List<Alimentacao> getAlimentacao() {
@@ -56,8 +56,8 @@ public class Leao extends Animal implements Pesquisa {
         this.visitantes = visitantes;
     }
 
-    public void setHrAlimentado(int hrAlimentado) {
-        this.hrAlimentado = hrAlimentado;
+    public void setAlimentado(int alimentado) {
+        this.alimentado = alimentado;
     }
 
     // Método para comparar objeto com Leão:
@@ -79,7 +79,7 @@ public class Leao extends Animal implements Pesquisa {
         String printLeao = 
             "Leão! \n" +
             "Nome: " + getNome() + "\n" +
-            "Hora em que foi alimentado: " + getHrAlimentado() + "\n" +
+            "Hora em que foi alimentado: " + getAlimentado() + "\n" +
             "Jaula em que está: " + getJaula() + "\n" +
             "Quantidade de visitantes: " + getVisitantes() + "\n";
         
@@ -95,35 +95,42 @@ public class Leao extends Animal implements Pesquisa {
     }
 
     // Realizando um INSERT na tabela Leão.
-    public void insertLeao() {
+    public static Leao insertLeao(String nome, int alimentado, int visitantes, int jaulaId) throws Exception {
         try {
             // Instânciando a classe DAO, start na conexão com DB.
             DAO dao = new DAO();
             Connection conn = dao.startConnection();
-
-            // Criando o java statement.
-            Statement st = conn.createStatement();
     
             // Criando o INSERT para inserir todos os dados da tabela Leão.
             PreparedStatement insert = conn.prepareStatement(
-                "INSERT INTO zoo.leao VALUES (?,  ?, ?, ?, ?);",
+                "INSERT INTO zoo.leao (nome, alimentacao, visitantes, jaula_id) VALUES (?, ?, ?, ?);",
                 PreparedStatement.RETURN_GENERATED_KEYS
             );
 
-            if(insert.executeUpdate() > 0) {
-                ResultSet resultado = st.getGeneratedKeys();
+            // Atribuindo parâmetros ao INSERT.
+            insert.setString(1, nome);
+            insert.setInt(2, alimentado);
+            insert.setInt(3, visitantes);
+            insert.setInt(4, jaulaId);
 
-                if(resultado.next()) {
-                    resultado.getInt(1);
-                }
+            // Executando a QUERY utilizando ResultSet para pegar resultados.
+            if(insert.executeUpdate() > 0) {
+                ResultSet rs = insert.getGeneratedKeys();
+                rs.next();
+                Leao leao = new Leao(rs.getInt(1), nome, alimentado, visitantes);
+
+                // Fechando a conexão com DB.
+                dao.endConnection();
+
+                return leao;
             }
 
             // Fechando a conexão com DB.
             dao.endConnection();
+            throw new Exception("Erro ao incluir Golfinho.");
 
         } catch (Exception e) {
-            System.err.println("Tivemos um problema.");
-            System.err.println(e.getMessage());
+            throw new Exception(e.getMessage());
         }
     }
 

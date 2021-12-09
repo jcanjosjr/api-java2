@@ -1,5 +1,10 @@
 package view;
 
-public class AlterarGolfinho {
+// Importando bibliotecas.
+import javax.swing.*;
+
+public class AlterarGolfinho extends JFrame {
     
+    // Implementar
+
 }

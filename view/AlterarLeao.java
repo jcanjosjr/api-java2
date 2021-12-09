@@ -1,5 +1,10 @@
 package view;
 
-public class AlterarLeao {
+// Importando bibliotecas.
+import javax.swing.*;
+
+public class AlterarLeao extends JFrame {
     
+    // Implementar
+
 }

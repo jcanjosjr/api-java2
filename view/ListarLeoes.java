@@ -1,5 +1,10 @@
 package view;
 
-public class ListarLeoes {
+// Importando bibliotecas.
+import javax.swing.*;
+
+public class ListarLeoes extends JFrame {
     
+    // Implementar
+
 }

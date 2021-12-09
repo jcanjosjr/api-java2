@@ -1,5 +1,10 @@
 package view;
 
-public class ListarGolfinhos {
+// Importando bibliotecas.
+import javax.swing.*;
+
+public class ListarGolfinhos  extends JFrame {
     
+    // Implementar
+
 }

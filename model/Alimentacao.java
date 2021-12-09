@@ -4,7 +4,6 @@ package model;
 import java.sql.Date;
 import java.util.List;
 import java.sql.ResultSet;
-import java.sql.Statement;
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.sql.PreparedStatement;
@@ -93,33 +92,38 @@ public class Alimentacao {
     }
 
     // Inserindo dados em Alimentação.
-    public void insertAlimentacao(int id, int idLeao, Date data, String detalhes) {
+    public static Alimentacao insertAlimentacao(int idLeao, Date data, String detalhes) throws Exception {
         try {
             // Instânciando a classe DAO, iniciando conexão com DB.
             DAO dao = new DAO();
             Connection conn = dao.startConnection();
 
-            // Criando o java statement.
-            Statement st = conn.createStatement();
-    
             // Criando o INSERT para inserir todos os dados da tabela Leão.
             PreparedStatement insert = conn.prepareStatement(
-                "INSERT INTO zoo.alimentacao VALUES (?, ?, ?, ?);",
+                "INSERT INTO zoo.alimentacao (leao_id, data, detalhes) VALUES (?, ?, ?);",
                 PreparedStatement.RETURN_GENERATED_KEYS
             );
                 
             // Atribuindo parâmetros ao INSERT.
-            insert.setInt(1, id);
-            insert.setInt(2, idLeao);
-            insert.setDate(3, data);
-            insert.setString(4, detalhes);
+            insert.setInt(1, idLeao);
+            insert.setDate(2, data);
+            insert.setString(3, detalhes);
+
+            if (insert.executeUpdate() > 0) {
+                ResultSet rs = insert.getGeneratedKeys();
+                rs.next();
+                Alimentacao alimento = new Alimentacao(rs.getInt(1), data, detalhes);
+                // Fechando a conexão com DB.
+                dao.endConnection();
+                return alimento;
+            }
 
             // Fechando a conexão com DB.
-            // dao.endConnection();
+            dao.endConnection();
+            throw new Exception("Erro ao incluir Alimentação");
 
         } catch (Exception e) {
-            System.err.println("Tivemos um problema.");
-            System.err.println(e.getMessage());
+            throw new Exception(e.getMessage());
         }
     }
 
