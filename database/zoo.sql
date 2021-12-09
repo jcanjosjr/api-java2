@@ -63,4 +63,3 @@ INSERT INTO jaula VALUES (2, 'Jaula para Golfinhos');
 INSERT INTO golfinho VALUES (1, 'Vigarista', 2, 2);
 INSERT INTO leao VALUES (1, 'Dudu Duelista', 2, 1, 1);
 INSERT INTO zoo.treinamento VALUES (1, 1, "2020-12-08", "Amemdobobo");
-
