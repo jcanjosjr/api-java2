@@ -52,7 +52,7 @@ public class CadastrarGolfinho extends JFrame {
         pane.add(button1);
         pane.add(button2);
         
-        // Mensagens dos botões:
+        // Ações dos botões:
         button1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 button1ActionPerformed(e);
@@ -98,12 +98,8 @@ public class CadastrarGolfinho extends JFrame {
 
     // Gerando ação ao botão de Cancelar.
     private void button2ActionPerformed(ActionEvent e) {
-        JOptionPane.showMessageDialog(
-            this,
-            "Tarefa cancelada.",
-            "Confirmação de Cadastro",
-            JOptionPane.INFORMATION_MESSAGE
-        );
+            // Fechando a janela ao cancelar.
+            this.dispose();
     }
 
 }

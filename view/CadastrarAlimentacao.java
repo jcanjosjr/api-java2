@@ -99,12 +99,8 @@ public class CadastrarAlimentacao extends JFrame {
 
     // Gerando ação ao botão de Cancelar.
     private void button2ActionPerformed(ActionEvent e) {
-        JOptionPane.showMessageDialog(
-            this,
-            "Tarefa cancelada.",
-            "Confirmação de Cadastro",
-            JOptionPane.INFORMATION_MESSAGE
-        );
+        // Fechando a janela ao cancelar.
+        this.dispose();
     }
 
 }

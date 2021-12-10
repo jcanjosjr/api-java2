@@ -14,8 +14,8 @@ public class CadastrarLeao extends JFrame {
     
     // Instânciando campos de texto.
     JLabel labelNome = new JLabel("Nome: ");
-    JLabel labelAlimentacao = new JLabel("Nome: ");
-    JLabel labelVisitantes = new JLabel("Alimentação: ");
+    JLabel labelAlimentacao = new JLabel("Alimentação: ");
+    JLabel labelVisitantes = new JLabel("Visitantes: ");
     JLabel labelJaula = new JLabel("ID referente à Jaula: ");
 
     // Instânciando botões.
@@ -107,11 +107,8 @@ public class CadastrarLeao extends JFrame {
 
     // Gerando ação ao botão de Cancelar.
     private void button2ActionPerformed(ActionEvent e) {
-        JOptionPane.showMessageDialog(
-            this,
-            "Tarefa cancelada.",
-            "Confirmação de Cadastro",
-            JOptionPane.INFORMATION_MESSAGE
-        );
+            // Fechando a janela ao cancelar.
+            this.dispose();
     }
+
 }
