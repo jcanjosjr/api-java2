@@ -15,4 +15,5 @@ As seguintes ferramentas foram usadas no Frontend do projeto:
 
 - [JFrame](https://docs.oracle.com/javase/7/docs/api/javax/swing/JFrame.html)
 
-
+ Um agradecimento ao mestre que auxíliou neste projeto, explicou assuntos complexos e abstratos de maneira que deixaram assuntos complexos, parecerem fáceis, e me deu uma nova visão referente a Programação Orientada a Objetos.
+- [Jackson Machado (jacksjm)](https://github.com/jacksjm)
