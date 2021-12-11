@@ -27,7 +27,6 @@ public class CadastrarTreinamento extends JFrame {
     JTextField textDetalhes = new JTextField(25);
     JTextField textGolfinho = new JTextField(25);
 
-
     public CadastrarTreinamento() {
 
         // Padronizando a janela.

@@ -47,15 +47,15 @@ public class AlterarLeao extends JFrame {
         pane.add(labelNome);
         pane.add(textNome);
 
-        // Adicionando o campo Treinamento.
+        // Adicionando o campo Alimentação.
         pane.add(labelAlimentacao);
         pane.add(textAlimentacao);
 
-        // Adicionando o campo da Jaula.
+        // Adicionando o campo da Visitantes.
         pane.add(labelVisitantes);
         pane.add(textVisitantes);
 
-        // Adicionando o campo Jaul ID.
+        // Adicionando o campo Jaula ID.
         pane.add(labelJaula);
         pane.add(textJaula);
 

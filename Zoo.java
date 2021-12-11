@@ -11,6 +11,8 @@ import view.AlterarLeao;
 import view.CadastrarAlimentacao;
 import view.CadastrarGolfinho;
 import view.CadastrarTreinamento;
+import view.ListarGolfinhos;
+import view.ListarLeoes;
 
 
 public class Zoo extends JFrame {
@@ -60,42 +62,43 @@ public class Zoo extends JFrame {
 
         button3.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                button2ActionPerformed(e);
+                button3ActionPerformed(e);
             }
         });
 
         button4.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                button2ActionPerformed(e);
+                button4ActionPerformed(e);
             }
         });
 
         button5.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                button2ActionPerformed(e);
+                button5ActionPerformed(e);
             }
         });
 
         button6.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                button2ActionPerformed(e);
+                button6ActionPerformed(e);
             }
         });
 
         button7.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                button2ActionPerformed(e);
+                button7ActionPerformed(e);
             }
         });
 
         button8.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                button2ActionPerformed(e);
+                button8ActionPerformed(e);
             }
         });
 
     }
 
+    // Chamando a view para o Botão 1.
     private void button1ActionPerformed(ActionEvent e) {
         try {
             // Instanciando a View de Alterar Golfinho.
@@ -106,6 +109,8 @@ public class Zoo extends JFrame {
         }
     
     }
+
+    // Chamando a view para o Botão 2.
     private void button2ActionPerformed(ActionEvent e) {
         try {
             // Instanciando a View de Cadastrar Golfinho.
@@ -117,6 +122,7 @@ public class Zoo extends JFrame {
     
     }
 
+    // Chamando a view para o Botão 3.
     private void button3ActionPerformed(ActionEvent e) {
         try {
             // Instanciando a View de Cadastrar Treinamento.
@@ -128,6 +134,7 @@ public class Zoo extends JFrame {
     
     }
 
+    // Chamando a view para o Botão 4.
     private void button4ActionPerformed(ActionEvent e) {
         try {
             // Instanciando a View de Alterar Leão.
@@ -136,8 +143,10 @@ public class Zoo extends JFrame {
             System.err.println("Tivemos um problema no cadastro.");
             System.err.println(err.getMessage());
         }
+
     }
 
+    // Chamando a view para o Botão 5.
     private void button5ActionPerformed(ActionEvent e) {
         try {
             // Instanciando a View de Cadastrar Leão.
@@ -149,6 +158,7 @@ public class Zoo extends JFrame {
     
     }
 
+    // Chamando a view para o Botão 6.
     private void button6ActionPerformed(ActionEvent e) {
         try {
             // Instanciando a View de Cadastrar Alimentação.
@@ -160,11 +170,23 @@ public class Zoo extends JFrame {
     }
 
     private void button7ActionPerformed(ActionEvent e) {
-        // Implementar
+        try {
+            // Instanciando a View de Cadastrar Alimentação.
+            ListarGolfinhos listarGolfinho = new ListarGolfinhos();
+        } catch (Exception err) {
+            System.err.println("Tivemos um problema no cadastro.");
+            System.err.println(err.getMessage());
+        }
     }
 
     private void button8ActionPerformed(ActionEvent e) {
-        // Implementar
+        try {
+            // Instanciando a View de Cadastrar Alimentação.
+            ListarLeoes listarLeao = new ListarLeoes();
+        } catch (Exception err) {
+            System.err.println("Tivemos um problema no cadastro.");
+            System.err.println(err.getMessage());
+        }
     }
 
     public static void main(String[] args) {

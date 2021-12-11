@@ -135,7 +135,7 @@ public class Leao extends Animal implements Pesquisa {
     }
 
     // Buscando todos os dados na tabela Leão
-    public void getAll() {
+    public static String getAll() throws Exception {
         try {
             // Instânciando a classe DAO, start na conexão com DB.
             DAO dao = new DAO();
@@ -150,6 +150,7 @@ public class Leao extends Animal implements Pesquisa {
             // Executando a query, e obtendo o resultado.
             ResultSet rs = st.executeQuery(select);
 
+            String retorno = "";
             // Iterando sobre o resultado.
             while (rs.next()) {
                 Leao leao = new Leao(
@@ -159,16 +160,15 @@ public class Leao extends Animal implements Pesquisa {
                     rs.getInt(4)
                 );
 
-                System.out.println(leao);
+                retorno += leao.toString() + "\n";
             }
                
 
             // Fechando a conexão com DB.
             dao.endConnection();
-
+            return retorno;
         } catch (Exception e) {
-            System.err.println("Tivemos um problema.");
-            System.err.println(e.getMessage());
+            throw new Exception(e.getMessage());
         }
     }
 

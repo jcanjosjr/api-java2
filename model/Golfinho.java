@@ -2,11 +2,16 @@ package model;
 
 // Importando bibliotecas:
 import java.util.List;
+
+import javax.swing.event.SwingPropertyChangeSupport;
+
 import java.sql.Statement;
 import java.sql.ResultSet;
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.sql.PreparedStatement;
+
+import view.ListarGolfinhos;
 
 public class Golfinho extends Animal implements Pesquisa {
     
@@ -122,7 +127,7 @@ public class Golfinho extends Animal implements Pesquisa {
     }
 
     // Buscando todos os dados na tabela Golfinho
-    public void getAll() {
+    public static String getAll() throws Exception {
         try {
             // Instânciando a classe DAO, start na conexão com DB.
             DAO dao = new DAO();
@@ -137,6 +142,7 @@ public class Golfinho extends Animal implements Pesquisa {
             // Executando a query, e obtendo o resultado.
             ResultSet rs = st.executeQuery(select);
 
+            String retorno = "";
             // Iterando sobre o resultado.
             while (rs.next()) {
                 Golfinho golfinho = new Golfinho(
@@ -145,16 +151,14 @@ public class Golfinho extends Animal implements Pesquisa {
                     rs.getInt(3)
                 );
 
-                System.out.println(golfinho);
+                retorno += golfinho.toString() + "\n";
             }
-               
 
             // Fechando a conexão com DB.
             dao.endConnection();
-
+            return retorno;
         } catch (Exception e) {
-            System.err.println("Tivemos um problema.");
-            System.err.println(e.getMessage());
+            throw new Exception(e.getMessage());
         }
     }
 
