@@ -100,7 +100,7 @@ public class Leao extends Animal implements Pesquisa {
             // Instânciando a classe DAO, start na conexão com DB.
             DAO dao = new DAO();
             Connection conn = dao.startConnection();
-    
+
             // Criando o INSERT para inserir todos os dados da tabela Leão.
             PreparedStatement insert = conn.prepareStatement(
                 "INSERT INTO zoo.leao (nome, alimentacao, visitantes, jaula_id) VALUES (?, ?, ?, ?);",
@@ -162,7 +162,6 @@ public class Leao extends Animal implements Pesquisa {
 
                 retorno += leao.toString() + "\n";
             }
-               
 
             // Fechando a conexão com DB.
             dao.endConnection();
@@ -245,7 +244,6 @@ public class Leao extends Animal implements Pesquisa {
 
                 return leao;
             }
-               
 
             // Fechando a conexão com DB.
             dao.endConnection();
@@ -255,4 +253,5 @@ public class Leao extends Animal implements Pesquisa {
             throw new Exception(e.getMessage());
         }
     }
+
 }

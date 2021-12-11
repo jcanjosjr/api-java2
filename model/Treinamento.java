@@ -94,6 +94,7 @@ public class Treinamento {
         return printTreinamento;
     }
 
+    // Inserir Treinamento no DATABASE.
     public static Treinamento inserirTreinamento(int golfinhoId, Date data, String detalhes) throws Exception {
         try {
             // Instânciando a classe DAO, start na conexão com DB.

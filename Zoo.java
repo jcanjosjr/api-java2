@@ -34,6 +34,7 @@ public class Zoo extends JFrame {
         this.setSize(600,400);
         this.setVisible(true);
 
+        // Gerando o Container e layout da Janela.
         Container pane = this.getContentPane();
         pane.setLayout(new GridLayout(8,1));
 
@@ -98,7 +99,7 @@ public class Zoo extends JFrame {
 
     }
 
-    // Chamando a view para o Botão 1.
+    // Instânciando a view para o Botão 1.
     private void button1ActionPerformed(ActionEvent e) {
         try {
             // Instanciando a View de Alterar Golfinho.
@@ -110,7 +111,7 @@ public class Zoo extends JFrame {
     
     }
 
-    // Chamando a view para o Botão 2.
+    // Instânciando a view para o Botão 2.
     private void button2ActionPerformed(ActionEvent e) {
         try {
             // Instanciando a View de Cadastrar Golfinho.
@@ -122,7 +123,7 @@ public class Zoo extends JFrame {
     
     }
 
-    // Chamando a view para o Botão 3.
+    // Instânciando a view para o Botão 3.
     private void button3ActionPerformed(ActionEvent e) {
         try {
             // Instanciando a View de Cadastrar Treinamento.
@@ -134,7 +135,7 @@ public class Zoo extends JFrame {
     
     }
 
-    // Chamando a view para o Botão 4.
+    // Instânciando a view para o Botão 4.
     private void button4ActionPerformed(ActionEvent e) {
         try {
             // Instanciando a View de Alterar Leão.
@@ -146,7 +147,7 @@ public class Zoo extends JFrame {
 
     }
 
-    // Chamando a view para o Botão 5.
+    // Instânciando a view para o Botão 5.
     private void button5ActionPerformed(ActionEvent e) {
         try {
             // Instanciando a View de Cadastrar Leão.
@@ -158,7 +159,7 @@ public class Zoo extends JFrame {
     
     }
 
-    // Chamando a view para o Botão 6.
+    // Instânciando a view para o Botão 6.
     private void button6ActionPerformed(ActionEvent e) {
         try {
             // Instanciando a View de Cadastrar Alimentação.
@@ -169,6 +170,7 @@ public class Zoo extends JFrame {
         }
     }
 
+    // Instânciando a view para o Botão 7.
     private void button7ActionPerformed(ActionEvent e) {
         try {
             // Instanciando a View de Cadastrar Alimentação.
@@ -178,7 +180,7 @@ public class Zoo extends JFrame {
             System.err.println(err.getMessage());
         }
     }
-
+    // Instânciando a view para o Botão 8.
     private void button8ActionPerformed(ActionEvent e) {
         try {
             // Instanciando a View de Cadastrar Alimentação.
@@ -191,6 +193,7 @@ public class Zoo extends JFrame {
 
     public static void main(String[] args) {
         
+        // Instânciando o Menu do Sistema.
         Zoo zoo = new Zoo();
     }
 }

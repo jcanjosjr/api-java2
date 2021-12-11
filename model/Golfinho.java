@@ -2,19 +2,14 @@ package model;
 
 // Importando bibliotecas:
 import java.util.List;
-
-import javax.swing.event.SwingPropertyChangeSupport;
-
 import java.sql.Statement;
 import java.sql.ResultSet;
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.sql.PreparedStatement;
 
-import view.ListarGolfinhos;
-
 public class Golfinho extends Animal implements Pesquisa {
-    
+
     // Atributos da classe Golfinho.
     private int qtdTreinos;
     // Golfinho possui N -> Treinamentos.
@@ -135,7 +130,7 @@ public class Golfinho extends Animal implements Pesquisa {
 
             // Criando o java statement.
             Statement st = conn.createStatement();
-    
+
             // Criando o SELECT para trazer todos os dados da tabela Golfinho.
             String select = "SELECT * FROM zoo.golfinho;";
 
@@ -168,7 +163,7 @@ public class Golfinho extends Animal implements Pesquisa {
             // Instânciando a classe DAO, start na conexão com DB.
             DAO dao = new DAO();
             Connection conn = dao.startConnection();
-   
+
             // Preparando o Select com PreparedStatement:
             PreparedStatement select = conn.prepareStatement(
                 "SELECT * FROM zoo.golfinho WHERE id = ?;",
@@ -191,7 +186,7 @@ public class Golfinho extends Animal implements Pesquisa {
 
                 System.out.println(golfinho);
             }
-               
+
 
             // Fechando a conexão com DB.
             dao.endConnection();
@@ -234,7 +229,7 @@ public class Golfinho extends Animal implements Pesquisa {
 
                 return golfinho;
             }
-               
+
             // Fechando a conexão com DB.
             dao.endConnection();
             throw new Exception("Erro ao incluir Golfinho.");

@@ -34,6 +34,7 @@ public class AlterarGolfinho extends JFrame {
         this.setSize(600,400) ;
         this.setVisible(true);
 
+        // Gerando o Container e layout da Janela.
         Container pane = this.getContentPane();
         pane.setLayout(new GridLayout(5,2));
 
