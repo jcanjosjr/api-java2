@@ -5,14 +5,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 // Import View.
-import view.CadastrarLeao;
-import view.AlterarGolfinho;
-import view.AlterarLeao;
-import view.CadastrarAlimentacao;
-import view.CadastrarGolfinho;
-import view.CadastrarTreinamento;
-import view.ListarGolfinhos;
 import view.ListarLeoes;
+import view.AlterarLeao;
+import view.CadastrarLeao;
+import view.ListarGolfinhos;
+import view.AlterarGolfinho;
+import view.CadastrarGolfinho;
+import view.CadastrarAlimentacao;
+import view.CadastrarTreinamento;
 
 
 public class Zoo extends JFrame {
